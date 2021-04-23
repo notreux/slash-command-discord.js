@@ -1,0 +1,12 @@
+{
+  "name": "slash-command-discord.js",
+  "version": "1.0.0",
+  "description": "A simple handler for slash commands in discord.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["slash commands", "discord.js"],
+  "author": "NotReux",
+  "license": "Apache 2.0"
+}
