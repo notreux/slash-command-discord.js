@@ -1,1 +1,1 @@
-# SlashCommandController
+# slash-command-discord.js
