@@ -200,4 +200,4 @@ m.onSlashCommand = (client, f) => {
     
 }
 
-module.exports = m
+module.exports = m;
