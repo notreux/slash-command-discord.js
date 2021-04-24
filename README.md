@@ -5,6 +5,10 @@ Note: The discord api updates the commands every hour, if you want your command 
 
 Note: This command is oriented to discord.js so it is recommended that you have it installed.
 
+Note: All methods and events in the module are recommended to be placed in the bot's ready event, because if the client is not ready, the module is quite prone to failure (except for classes and their methods, they do not need it).
+
+Note: Remember to invite your bot with the oauth guilds.commands, if you don't do this, slash commands won't work.
+
 # Classes
 
 
@@ -83,7 +87,6 @@ addChoice(string name, string value): A choice is added to the option.
 
 # Module Methods
 
-
 post(client Client): With this method you create or update the commands created.
 
 getPostedCommands(client Client, snowflake guildId [Optional]): returns an array with all the commands created and usable for the user.
@@ -93,3 +96,33 @@ removeCommand(client Client, snowflake id, snowflake guildId [Optional]): delete
 # Module Events
 
 onSlashCommand(client, function): returns a slashMessage each time a command is used.
+
+# Examples
+
+```javascript
+const Discord = require('discord.js');
+const client = new Discord.Client();
+
+const slashManager = require('slash-command-discord.js');
+
+client.login(process.env.token)
+
+const test = new slashManager.command()
+
+test.setName("My first command")
+test.setDescription("This is my first slash command.")
+
+client.on('ready', () => {
+
+     slashManager.onSlashCommand(client, (command, interaction) => {
+    
+         console.log(command);
+
+         command.reply(`Used command: ` + command.name);
+
+    })
+
+    slashManager.post(client);
+
+})
+```
