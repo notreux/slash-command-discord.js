@@ -1,6 +1,7 @@
 const m = {};
 
 const commands = [];
+const types = ["subCommand", "subCommandGroup", "string", "integer", "boolean", "user", "channel", "role"]
 
 class SlashBaseModule{
 
@@ -20,15 +21,17 @@ class slashMessage{
     
     constructor(interaction, client){
 
-        this.interaction = interaction;
-        this.member = interaction.member;
         this.name = interaction.data.name;
         this.id = interaction.id;
+
+        this.interaction = interaction;
+        this.member = interaction.member;
+        
         this.createdAt = new Date();
         this.client = client;
 
         if (interaction.data.options && interaction.data.options[0])
-        this.choice = interaction.data.options[0];
+        this.options = interaction.data.options;
 
     }
 
@@ -87,16 +90,14 @@ m.slashOption = class slashOption extends SlashBaseModule{
 
         super();
 
-        this.choices = [];
-        this.type = 1;
+        this.data.choices = [];
+        this.data.type = 1;
 
     }
     
     setType(type){
 
         let intType = 1;
-
-        let types = ["subCommand", "subCommandGroup", "string", "integer", "boolean", "user", "channel", "role"]
 
         types.forEach(x => {
 
@@ -108,11 +109,11 @@ m.slashOption = class slashOption extends SlashBaseModule{
 
     }
 
-    isRequired(c){
+    isRequired(yesOrNo){
 
-        if (typeof(c) != "boolean") throw "The first argument of isRequired must be a boolean.";
+        if (typeof(yesOrNo) != "boolean") throw "The first argument of isRequired must be a boolean.";
 
-        this.data.required = c;
+        this.data.required = yesOrNo;
     }
 
     addChoice(name, value){
@@ -135,7 +136,7 @@ m.post = (client) => {
     setTimeout(() => {
 
         if (!client || !client.uptime) throw 'The first argument of post must be a client.';
-        console.log(commands)
+
         commands.forEach(x => {
 
             if (x.guildId)
@@ -159,9 +160,9 @@ m.post = (client) => {
     },1000)
 }
 
-m.getPostedCommands = async(client) => {
+m.getPostedCommands = async(client, guildId) => {
 
-    return await client.api.applications(client.user.id).commands.get();
+    return typeof(guildId) == "string" ? await client.api.applications(client.user.id).guild(guildId).commands.get() : await client.api.applications(client.user.id).commands.get()
 
 }
 
@@ -199,4 +200,4 @@ m.onSlashCommand = (client, f) => {
     
 }
 
-module.exports = m;
+module.exports = m
