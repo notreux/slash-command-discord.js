@@ -86,7 +86,7 @@ addChoice(string name, string value): A choice is added to the option.
 
 post(client Client): With this method you create or update the commands created.
 
-getPostedCommands(): returns an array with all the commands created and usable for the user.
+getPostedCommands(client Client, snowflake guildId [Optional]): returns an array with all the commands created and usable for the user.
 
 removeCommand(client Client, snowflake id, snowflake guildId [Optional]): deletes a command already created using its id, it can be obtained with the getPostedCommands method.
 
