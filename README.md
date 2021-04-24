@@ -103,26 +103,26 @@ onSlashCommand(client, function): returns a slashMessage each time a command is 
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-const slashManager = require('slash-command-discord.js');
+const slashManager = require('slash-command-discord.js'); 
 
 client.login(process.env.token)
 
-const test = new slashManager.command()
+const test = new slashManager.command() // creating a new command
 
-test.setName("My first command")
-test.setDescription("This is my first slash command.")
+test.setName("My first command") // setting the command name
+test.setDescription("This is my first slash command.") // setting the command description
 
 client.on('ready', () => {
 
-     slashManager.onSlashCommand(client, (command, interaction) => {
+     slashManager.onSlashCommand(client, (command, interaction) => { // a listener for every time a command is used
     
          console.log(command);
 
-         command.reply(`Used command: ` + command.name);
+         command.reply(`Used command: ` + command.name); // respond to the user
 
     })
 
-    slashManager.post(client);
+    slashManager.post(client); // Posting the command, to make it visible on all servers
 
 })
 ```
