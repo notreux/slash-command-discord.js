@@ -2,6 +2,7 @@ const m = {};
 
 const commands = [];
 const types = ["subCommand", "subCommandGroup", "string", "integer", "boolean", "user", "channel", "role"]
+const embedTypes = "richvideoimagegifvarticlelink";
 
 class SlashBaseModule{
 
@@ -25,7 +26,6 @@ class slashMessage{
         this.id = interaction.id;
 
         this.interaction = interaction;
-        this.member = interaction.member;
         
         this.createdAt = new Date();
         this.client = client;
@@ -37,20 +37,26 @@ class slashMessage{
 
     reply(response) {
 
-        this.client.api.interactions(this.interaction.id, this.interaction.token).callback.post({
+        const fresponse = {
 
-            data:{
+            "type": 4,
 
-                type: 4,
+            "data": {
 
-                data:{
-                      
-                    content: response
-        
-                }
+                "embeds": []
+
             }
-        
-        }).catch(console.error)
+
+        }
+
+        if (response && embedTypes.includes(response.type))
+
+             fresponse.data.embeds.push(response);
+
+        else fresponse.data.content = response;
+
+        this.client.api.interactions(this.interaction.id, this.interaction.token).callback.post({data:fresponse}).catch(console.error)
+
     };
 
 
@@ -185,11 +191,12 @@ m.onSlashCommand = (client, f) => {
          if (typeof(f) != "function") throw 'The secondary argument of onSlashCommand must be a function.';
          if (!client.uptime) throw 'The first argument of onSlashCommand must be a Discord Client.';
 
-        client.ws.on('INTERACTION_CREATE', interaction => {
+        client.ws.on('INTERACTION_CREATE', async interaction => {
 
             const msg = new slashMessage(interaction, client);
             msg.channel = client.channels.cache.get(interaction.channel_id);
             msg.guild = client.guilds.cache.get(interaction.guild_id)
+            msg.member = await msg.guild.members.fetch(interaction.member.user.id);
 
             f(msg, interaction);
 
