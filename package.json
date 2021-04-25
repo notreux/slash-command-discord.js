@@ -1,12 +1,33 @@
 {
   "name": "slash-command-discord.js",
-  "version": "1.0.0",
+  "version": "1.2.1",
   "description": "A simple handler for slash commands in discord.js",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["slash commands", "discord.js"],
+
+  "keywords": [
+    "slash",
+    "commands",
+    "discord.js",
+    "discord",
+    "discord-slash-commands",
+    "slash-commands"
+  ],
+
   "author": "NotReux",
-  "license": "Apache 2.0"
+  "license": "Apache 2.0",
+  
+  "repository": {
+    "type": "git",
+    "directory": "https://github.com/NotReux/slash-command-discord.js"
+  },
+
+  "bugs":{
+    "url": "https://github.com/NotReux/slash-command-discord.js/issues"
+  },
+
+  "homepage": "https://github.com/NotReux/slash-command-discord.js/blob/main/README.md"
+
 }
