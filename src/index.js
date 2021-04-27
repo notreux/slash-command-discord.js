@@ -2,7 +2,7 @@ const m = {};
 
 const commands = [];
 const types = ["subCommand", "subCommandGroup", "string", "integer", "boolean", "user", "channel", "role"]
-const embedTypes = "richvideoimagegifvarticlelink";
+const embedTypes = "rich video image gifv article link";
 
 class SlashBaseModule{
 
@@ -115,11 +115,11 @@ m.slashOption = class slashOption extends SlashBaseModule{
 
     }
 
-    isRequired(yesOrNo){
+    isRequired(bool){
 
-        if (typeof(yesOrNo) != "boolean") throw "The first argument of isRequired must be a boolean.";
+        if (typeof(bool) != "boolean") throw "The first argument of isRequired must be a boolean.";
 
-        this.data.required = yesOrNo;
+        this.data.required = bool;
     }
 
     addChoice(name, value){
