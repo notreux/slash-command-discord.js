@@ -1,7 +1,7 @@
 {
   "name": "slash-command-discord.js",
-  "version": "1.2.1",
-  "description": "A simple handler for slash commands in discord.js",
+  "version": "1.2.2",
+  "description": "It is a simple module for discordjs with the intention of facilitating and accelerating the process of creating slash commands.",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
