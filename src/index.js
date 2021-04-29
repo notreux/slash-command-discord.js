@@ -168,7 +168,11 @@ m.post = (client) => {
 
 m.getPostedCommands = async(client, guildId) => {
 
-    return typeof(guildId) == "string" ? await client.api.applications(client.user.id).guild(guildId).commands.get() : await client.api.applications(client.user.id).commands.get()
+    return typeof(guildId) == "string" ? 
+
+    await client.api.applications(client.user.id).guild(guildId).commands.get() : 
+    
+    await client.api.applications(client.user.id).commands.get();
 
 }
 
