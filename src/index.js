@@ -124,7 +124,7 @@ m.slashOption = class slashOption extends SlashBaseModule{
 
     addChoice(name, value){
 
-        if (typeof(c) != "string") throw "The first argument of addChoice must be a string.";
+        if (typeof(name) != "string" && typeof(value) != "string") throw "The arguments of addChoice must be strings.";
 
         this.data.choices.push({
 
