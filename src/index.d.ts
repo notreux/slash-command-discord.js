@@ -1,3 +1,58 @@
+type ApplicationCommandOptionChoice = {
+	name: string,
+	value: string | number
+}
+
+type ApplicationCommandOption = {
+	type: number,
+	name: string,
+	description: string,
+	required: boolean,
+	choices: [ApplicationCommandOptionChoice],
+	options: [ApplicationCommandOption]
+}
+
+type ApplicationCommand = {
+	name: string,
+	description: string,
+	options: [ApplicationCommandOption],
+	default_permission: boolean
+}
+
+type Interaction = {
+	type: number,
+	token: string,
+	member: {
+		user: {
+			id: number,
+			username: string,
+			avatar: string,
+			discriminator: string,
+			public_flags: number
+		},
+		roles: [string],
+		premium_since: Date | null,
+		permissions: string,
+		pending: boolean,
+		nick: string | null,
+		mute: boolean,
+		joined_at: Date,
+		is_pending: boolean,
+		deaf: boolean
+	},
+	id: string,
+	guild_id: string,
+	data: {
+		options: [{
+			name: string,
+			value: string
+		}],
+		name: string,
+		id: string
+	},
+	channel_id: string
+}
+
 declare module 'slash-command-discord.js' {
 	import { Client } from 'discord.js';
 
@@ -7,7 +62,7 @@ declare module 'slash-command-discord.js' {
 	 * 
 	 * @param guildId Guild ID to fetch commands from
 	 */
-	export function getPostedCommands(client: Client, guildId?: string): Promise<[ApplicationCommand]>;
+	export function getPostedCommands(client: Client, guildId?: string): Promise<ApplicationCommand[]>;
 	/**
 	 * 
 	 * @param guildId Guild ID to delete commands from
@@ -18,15 +73,15 @@ declare module 'slash-command-discord.js' {
 	export function onSlashCommand(client: Client,
 		func: (
 			command: slashMessage,
-			interaction: InteractionInterface) => void
+			interaction: Interaction) => void
 			): slashMessage;
 
 	export class slashMessage {
-		constructor(interaction:InteractionInterface, client:Client)
+		constructor(interaction:Interaction, client:Client)
 
 		public readonly name: string;
 		public readonly id: string;
-		public readonly interaction: InteractionInterface;
+		public readonly interaction: Interaction;
 		public readonly createdAt: Date;
 		public readonly client: Client
 		public reply(msg:string):void
@@ -58,60 +113,5 @@ declare module 'slash-command-discord.js' {
 		setType(type: string): void;
 		isRequired(enabled: boolean): void;
 		addChoice(name: string, value: string): void
-	}
-
-	interface ApplicationCommandOptionChoice {
-		name: string,
-		value: string | number
-	}
-
-	interface ApplicationCommandOption {
-		type: number,
-		name: string,
-		description: string,
-		required: boolean,
-		choices: [ApplicationCommandOptionChoice],
-		options: [ApplicationCommandOption]
-	}
-
-	interface ApplicationCommand {
-		name: string,
-		description: string,
-		options: [ApplicationCommandOption],
-		default_permission: boolean
-	}
-
-	interface InteractionInterface {
-		type: number,
-		token: string,
-		member: {
-			user: {
-				id: number,
-				username: string,
-				avatar: string,
-				discriminator: string,
-				public_flags: number
-			},
-			roles: [string],
-			premium_since: Date | null,
-			permissions: string,
-			pending: boolean,
-			nick: string | null,
-			mute: boolean,
-			joined_at: Date,
-			is_pending: boolean,
-			deaf: boolean
-		},
-		id: string,
-		guild_id: string,
-		data: {
-			options: [{
-				name: string,
-				value: string
-			}],
-			name: string,
-			id: string
-		},
-		channel_id: string
 	}
 }
