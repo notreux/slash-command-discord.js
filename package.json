@@ -1,6 +1,6 @@
 {
   "name": "slash-command-discord.js",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "It is a simple module for discordjs with the intention of facilitating and accelerating the process of creating slash commands.",
   "types": "./src/index.d.ts",
   "main": "src/index.js",
