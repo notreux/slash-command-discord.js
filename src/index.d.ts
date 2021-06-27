@@ -83,7 +83,10 @@ declare module 'slash-command-discord.js' {
 		public readonly id: string;
 		public readonly interaction: Interaction;
 		public readonly createdAt: Date;
-		public readonly client: Client
+		public readonly client: Client;
+		public readonly channel: Channel|undefined;
+		public readonly guild: Guild|undefined;
+		public readonly member: Member;
 		public reply(msg:string):void
 	}
 
