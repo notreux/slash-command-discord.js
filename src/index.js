@@ -88,6 +88,37 @@ m.command = class slashCommand extends SlashBaseModule{
 
 }
 
+m.subCommandGroup = class subCommandGroup extends SlashBaseModule {
+    constructor(){
+        super();
+
+        this.data.options = [];
+        this.data.type = 2;
+    }
+
+    addSubCommand(opt) {
+        if (!opt.data) throw 'The first argument of addOption must be a slashOption.';
+
+        this.data.options.push(opt.data);
+    }
+}
+
+m.subCommand = class subCommand extends SlashBaseModule {
+    constructor(){
+        super();
+
+        this.data.options = [];
+        this.data.type = 1;
+
+    }
+
+    addOption(opt){
+        if (!opt.data) throw 'The first argument of addOption must be a slashOption.';
+
+        this.data.options.push(opt.data);
+    }
+}
+
 m.slashOption = class slashOption extends SlashBaseModule{
 
     isSlashOption = true;
