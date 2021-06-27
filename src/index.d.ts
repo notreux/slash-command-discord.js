@@ -56,6 +56,8 @@ type Interaction = {
 declare module 'slash-command-discord.js' {
 	import { Client } from 'discord.js';
 
+	export type types = "subCommand" | "subCommandGroup" | "string" | "integer" | "boolean" | "user" | "channel" | "role"
+
 	// Module Methods
 	export function post(client:Client): void;
 	/**
@@ -103,14 +105,25 @@ declare module 'slash-command-discord.js' {
 		 */
 		constructor(guildId?: string);
 
-		protected option: [];
-		public addOption(opt:slashOption):void
+		public addOption(opt:slashOption|subCommandGroup|subCommand):void
+	}
+
+	export class subCommandGroup extends SlashBaseModule {
+		constructor();
+
+		addSubCommand(opt:subCommand)
+	}
+
+	export class subCommand extends SlashBaseModule {
+		constructor();
+
+		addOption(opt:slashOption)
 	}
 
 	export class slashOption extends SlashBaseModule {
 		constructor();
 
-		setType(type: string): void;
+		setType(type: types): void;
 		isRequired(enabled: boolean): void;
 		addChoice(name: string, value: string): void
 	}
