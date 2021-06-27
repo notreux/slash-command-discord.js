@@ -1,5 +1,5 @@
 declare module 'slash-command-discord.js' {
-	import { Client } from 'discord.js';
+	import { Client, Channel, Guild, GuildMember } from 'discord.js';
 
 	export type ApplicationCommandOptionChoice = {
 		name: string,
