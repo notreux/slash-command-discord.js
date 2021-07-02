@@ -138,7 +138,7 @@ m.slashOption = class slashOption extends SlashBaseModule{
 
         types.forEach(x => {
 
-            if (x == type) intType = types.indexOf(x);
+            if (x === type) intType = types.indexOf(x) + 1; // + 1 because array are 0 indexed and the Discord api start with 1
 
         })
 
