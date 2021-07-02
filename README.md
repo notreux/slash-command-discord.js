@@ -87,7 +87,7 @@ addChoice(string name, string value): A choice is added to the option.
 
 # Module Methods
 
-post(client Client): With this method you create or update the commands created.
+<promise> post(client Client): With this method you create or update the commands created.
 
 getPostedCommands(client Client, snowflake guildId [Optional]): returns an array with all the commands created and usable for the user.
 
