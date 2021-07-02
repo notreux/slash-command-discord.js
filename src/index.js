@@ -180,7 +180,7 @@ m.post = async (client) => {
 
                     data: x.data,
 
-                }).catch(console.error).then(console.log);
+                }).catch(console.error)
 
             else
 
@@ -188,7 +188,7 @@ m.post = async (client) => {
 
                     data: x.data,
 
-                }).catch(console.error).then(console.log);
+                }).catch(console.error)
 
         })
 
