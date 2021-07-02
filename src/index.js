@@ -168,9 +168,7 @@ m.slashOption = class slashOption extends SlashBaseModule{
 
 }
 
-m.post = (client) => {
-
-    setTimeout(() => {
+m.post = async (client) => {
 
         if (!client || !client.uptime) throw 'The first argument of post must be a client.';
 
@@ -194,7 +192,6 @@ m.post = (client) => {
 
         })
 
-    },1000)
 }
 
 m.getPostedCommands = async(client, guildId) => {
