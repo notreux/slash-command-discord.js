@@ -227,8 +227,10 @@ m.onSlashCommand = (client, f) => {
 
             const msg = new slashMessage(interaction, client);
             msg.channel = client.channels.cache.get(interaction.channel_id);
-            msg.guild = client.guilds.cache.get(interaction.guild_id)
-            msg.member = await msg.guild.members.fetch(interaction.member.user.id);
+            msg.guild = client.guilds.cache.get(interaction.guild_id);
+            if (msg.guild) {
+                msg.member = await msg.guild.members.fetch(interaction.member.user.id);
+            }
 
             f(msg, interaction);
 
